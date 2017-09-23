@@ -13,22 +13,26 @@ include_recipe 'lcd_web::users'
 #   action [:enable, :start]
 # end
 
-package platform_package_httpd
+# package platform_package_httpd
+#
+# service platform_service_httpd do
+#   action [:enable, :start]
+# end
 
-service platform_service_httpd do
-  action [:enable, :start]
-end
+# template '/var/www/html/index.html' do
+#   source 'index.html.erb'
+#   mode '0644'
+#   owner 'apache'
+#   group 'apache'
+#   variables({
+#     greeting: node['greeting'],
+#     greeting_scope: node['greeting_scope'],
+#     fqdn: node['fqdn']
+#   })
+# end
 
-template '/var/www/html/index.html' do
-  source 'index.html.erb'
-  mode '0644'
-  owner 'apache'
-  group 'apache'
-  variables({
-    greeting: node['greeting'],
-    greeting_scope: node['greeting_scope'],
-    fqdn: node['fqdn']
-  })
+hello_httpd 'apache hello world' do
+  greeting node['greeting']
 end
 
 service 'httpd' do
