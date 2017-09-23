@@ -1,4 +1,2 @@
 # lcd_web
-Cookbook generated with Brian's custom generator
-
-TODO: Enter the cookbook description here.
+This Chef cookbook was created from the Linux Academy: Chef Local Cookbook Development course exercises.
