@@ -6,7 +6,7 @@
 
 require 'spec_helper'
 
-describe 'lcd_web::default' do
+describe 'lcd_web::users' do
   context 'When all attributes are default, on an Ubuntu 16.04' do
     let(:chef_run) do
       # for a complete list of available platforms and versions see:
@@ -19,20 +19,12 @@ describe 'lcd_web::default' do
       expect { chef_run }.to_not raise_error
     end
 
-    it 'installs httpd' do
-      expect { chef_run }.to install_package('httpd')
+    it 'creates a group called developers' do
+      expect { chef_run }.to create_group('developers')
     end
 
-    it 'enables httpd' do
-      expect { chef_run }.to enable_service('httpd')
-    end
-
-    it 'starts and runs httpd' do
-      expect { chef_run }.to start_service('httpd')
-    end
-
-    it 'installs net-tools' do
-      expect { chef_run }.to install_package('net-tools')
+    it 'creates user called webadmin' do
+      expect { chef_run }.to create_user('webadmin').with(group: 'developers')
     end
   end
 end
